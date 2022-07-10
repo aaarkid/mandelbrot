@@ -1,6 +1,9 @@
+use std::env;
 use num::Complex;
 use std::str::FromStr;
-
+use image::ColorType;
+use image::png::PNGEncoder;
+use std::fs::File;
 
 
 fn escape_time(c: Complex<f64>, limit: u8) -> Option<u8> {
@@ -63,6 +66,15 @@ fn render(pixels: &mut [u8],
                     Some(count) => 255 - count as u8
                 };
         }
+    }
+}
+
+fn write_image (filename: &str, pixels &mut [u8], bounds: (usize, usize)) ->  Result<(), std::io::Error> {
+    let output = File::create(filename)?;
+    let encoder = PNGEncoder::new(output);
+    encoder.encode(&pixels, bounds.0 as u32, bounds.1 as u32, ColorType::Gray(8))?;
+
+    Ok(())
 }
 
 fn main() {
