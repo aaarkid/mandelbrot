@@ -7,6 +7,6 @@ edition = "2021"
 
 [dependencies]
 num = "0.4"
-image = "0.13.0"
+image = "0.23.12"
 crossbeam = "0.8"
 num_cpus = "1.13.1"
